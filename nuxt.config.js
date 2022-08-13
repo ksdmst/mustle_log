@@ -1,4 +1,14 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from 'vuetify/es5/util/colors';
+require('dotenv').config();
+
+plugins: [
+  '@/plugins/firebase.js',
+  { src: "~plugins/persistedstate.js", ssr: false }
+]
+modules: [
+  '@nuxtjs/dotenv'
+]
+
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -28,6 +38,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/firebase.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,6 +52,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/dotenv',
+    { src: "~plugins/persistedstate.js", ssr: false }
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -64,5 +77,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  privateRuntimeConfig: {
+    TEST: process.env.TEST
   }
 }
